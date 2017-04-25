@@ -21,6 +21,8 @@ Route::post('contacts/{id}', 'ContactController@update');
 
 Route::get('contacts/{id}/delete', 'ContactController@destroy');
 
+Route::get('contacts/{id}/export', 'ContactVCardController@singleContactVCard');
+
 Route::post('/signin','Auth\LoginController@signin');
 Route::get('/logout','Auth\LoginController@logout');
 

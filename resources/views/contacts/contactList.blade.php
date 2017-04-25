@@ -1,4 +1,6 @@
 @extends('layouts.contactLayout')
+
+@section('content')
 <link rel="stylesheet" href="{{ URL::asset('css/contactList.css') }}" />
 <script type="text/javascript" src="{{ URL::asset('js/contactList.js') }}"></script>
 
@@ -20,6 +22,7 @@
             </div>
         </div>
         <div class="col-sm-4 add-button">
+            <a href="/contacts/download" class="btn btn-default add-new"><span class="glyphicon glyphicon-download"></span> Export all</a>
             <a href="/contacts/create" class="btn btn-default add-new"><span class="glyphicon glyphicon-plus"></span> Add new Contact</a>
             </a>
         </div>
@@ -41,6 +44,9 @@
                                     @endif
                                 </a>
                                 <div class="pull-right btn-group-sm">
+                                    <a href="/contacts/{{$contact->id}}/export" class="btn btn-success tooltips export" data-placement="top" data-toggle="tooltip" data-original-title="Export">
+                                        <i class="fa fa-download"></i>
+                                    </a>
                                     <a href="/contacts/{{$contact->id}}/edit" class="btn btn-success tooltips" data-placement="top" data-toggle="tooltip" data-original-title="Edit">
                                         <i class="fa fa-pencil"></i>
                                     </a>
@@ -76,5 +82,9 @@
     @if(isset($error))
         alert('{{$error}}');
     @endif
+
+
 </script>
+
+@stop
 
