@@ -41,6 +41,10 @@ $app->singleton(
     App\Exceptions\Handler::class
 );
 
+//For Laravel Audit
+
+$app->register(OwenIt\Auditing\AuditingServiceProvider::class);
+
 /*
 |--------------------------------------------------------------------------
 | Return The Application

@@ -180,6 +180,8 @@ return [
         Laravel\Socialite\SocialiteServiceProvider::class,
         //Composer Service Provider
         App\Providers\ComposerServiceProvider::class,
+        //Laravel Audit
+        OwenIt\Auditing\AuditingServiceProvider::class,
 
     ],
 

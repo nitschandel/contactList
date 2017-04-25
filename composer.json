@@ -10,7 +10,9 @@
         "laravel/tinker": "~1.0",
         "laravel/socialite": "3.0.x-dev",
         "predis/predis":  "~1.0",
-        "jeroendesloovere/vcard" : "1.4.*"
+        "jeroendesloovere/vcard" : "1.4.*",
+        "owen-it/laravel-auditing" : "4.0.*",
+        "laravelista/lumen-vendor-publish" : "2.0.*"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",
