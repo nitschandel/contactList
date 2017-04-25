@@ -98,9 +98,9 @@
         </div>
         <!-- /.javascript files -->
 
-        <script src="js/jquery-3.2.0.min.js"></script> 
-        <script src="js/app.js"></script>     
-        <script src="js/wow.min.js"></script>
+        <script type="text/javascript" src="{{ URL::asset('js/jquery-3.2.0.min.js') }}"></script>
+        <script type="text/javascript" src="{{ URL::asset('js/app.js') }}"></script>  
+        <script type="text/javascript" src="{{ URL::asset('js/wow.min.js') }}"></script>
         <script>
             new WOW().init();
              function signupChanges(){

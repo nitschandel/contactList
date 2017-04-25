@@ -11,9 +11,15 @@
 |
 */
 
-Route::get('/', 'Auth\LoginController@Login');
+Route::get('/', array('as'=>'root', 'uses' => 'Auth\LoginController@Login'));
+
+Route::post('contacts/search', 'ContactController@search');
 
 Route::resource('contacts', 'ContactController');
+
+Route::post('contacts/{id}', 'ContactController@update');
+
+Route::get('contacts/{id}/delete', 'ContactController@destroy');
 
 Route::post('/signin','Auth\LoginController@signin');
 Route::get('/logout','Auth\LoginController@logout');
@@ -27,3 +33,4 @@ Route::get('auth/facebook/callback', 'Auth\LoginController@handleProviderCallbac
 
 Route::get('auth/google', 'Auth\LoginController@redirectToProviderGoogle');
 Route::get('auth/google/callback', 'Auth\LoginController@handleProviderCallbackGoogle');
+

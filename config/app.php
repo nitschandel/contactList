@@ -178,6 +178,8 @@ return [
         App\Providers\RouteServiceProvider::class,
         // Other service providers...
         Laravel\Socialite\SocialiteServiceProvider::class,
+        //Composer Service Provider
+        App\Providers\ComposerServiceProvider::class,
 
     ],
 

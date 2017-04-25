@@ -6,6 +6,8 @@ use App\User;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 class RegisterController extends Controller
 {
@@ -101,6 +103,8 @@ class RegisterController extends Controller
             $user->name = $name;
             $user->email = $email;
             $user->password = Hash::make($password);
+            $user->uuid = '';
+            $user->loginType = 'manual';
             $user->save();
             return redirect('/')->with('message','User Created Successfully! Please log in.');
         }

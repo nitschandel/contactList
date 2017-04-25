@@ -46,3 +46,32 @@ body{
     -webkit-border-radius: 50%;
     color: #7A7676;
 }
+
+.add-button {
+    padding : 15px;
+}
+
+@media (max-width: 767px) { 
+    .add-new {
+        float: left!important;
+    }
+}
+
+@media (min-width: 767px) { 
+    .add-new {
+        float: right!important;
+    }
+}
+
+.notfound{
+    color:#272727;
+    font-size:40px;
+    margin-top:1px;
+}
+.noContacts{        
+    text-align:center;
+}
+
+.btn-search{
+    height: 36px;
+}
