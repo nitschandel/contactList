@@ -44,10 +44,10 @@ class LoginController extends Controller
         $this->middleware('guest', ['except' => 'logout']);
     }
 
-    public function Login()
+    public function login()
     {
-        if(session()->has('error')){
-            return view('welcome')->with('error',session()->get('error'));
+        if (session()->has('error')) {
+            return view('welcome')->with('error', session()->get('error'));
         }
         return view('welcome');
     }
@@ -60,21 +60,20 @@ class LoginController extends Controller
     public function handleProviderCallback()
     {
          $facebookUser = Socialite::driver('facebook')->user();
-         try{
-             $user = User::where('email',$facebookUser->email)
-                        ->where('uuid',$facebookUser->id)
-                        ->first();
-             if(!$user){
+        try {
+            $user = User::where('email', $facebookUser->email)
+                      ->where('uuid', $facebookUser->id)
+                      ->first();
+            if (!$user) {
                 $user = $this->createOAuthUsers($facebookUser, 'facebook');
-             }
-             Auth::login($user);
+            }
+            Auth::login($user);
 
-             return redirect('/contacts');
-         }
-         catch(\Exception $e){
+            return redirect('/contacts');
+        } catch (\Exception $e) {
             Log::info($e);
-            return redirect('/')->with('error','Error occured during facebook login. Plaese try again.');
-         }
+            return redirect('/')->with('error', 'Error occured during facebook login. Plaese try again.');
+        }
     }
     public function redirectToProviderGoogle()
     {
@@ -84,21 +83,20 @@ class LoginController extends Controller
     public function handleProviderCallbackGoogle()
     {
          $googleUser = Socialite::driver('google')->user();
-         try{
-             $user = User::where('email',$googleUser->email)
-                        ->where('uuid',$googleUser->id)
-                        ->first();
-             if(!$user){
+        try {
+            $user = User::where('email', $googleUser->email)
+                      ->where('uuid', $googleUser->id)
+                      ->first();
+            if (!$user) {
                 $user = $this->createOAuthUsers($googleUser, 'google');
-             }
-             Auth::login($user);
+            }
+            Auth::login($user);
 
-             return redirect('/contacts');
-         }
-         catch(\Exception $e){
+            return redirect('/contacts');
+        } catch (\Exception $e) {
             Log::info($e);
-            return redirect('/')->with('error','Error occured during Google login. Plaese try again.');
-         }
+            return redirect('/')->with('error', 'Error occured during Google login. Plaese try again.');
+        }
     }
 
     public function signin(Request $request)
@@ -118,15 +116,14 @@ class LoginController extends Controller
         );
         if ($validator->fails()) {
             $error_messages = $validator->messages()->all();
-            return redirect('/')->with('error','Please fill all fields');
+            return redirect('/')->with('error', 'Please fill all fields');
         } else {
-            if(Auth::attempt(['email' => $email, 'password' => $password])){
+            if (Auth::attempt(['email' => $email, 'password' => $password])) {
                 return redirect('/contacts');
-            }else{
-                return redirect('/')->with('error','Please enter correct credentials');
+            } else {
+                return redirect('/')->with('error', 'Please enter correct credentials');
             }
         }
-
     }
 
     public function createOAuthUsers($newUser, $loginType)
@@ -147,6 +144,4 @@ class LoginController extends Controller
         Auth::logout();
         return redirect('/');
     }
-
-
 }

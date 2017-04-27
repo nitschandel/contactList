@@ -10,7 +10,7 @@ use OwenIt\Auditing\Contracts\Auditable as AuditableContract;
 class Contact extends Model implements AuditableContract
 {
     use Auditable;
-	use SoftDeletes;
+    use SoftDeletes;
 
     protected $dates = ['deleted_at'];
 

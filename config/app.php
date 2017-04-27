@@ -182,6 +182,8 @@ return [
         App\Providers\ComposerServiceProvider::class,
         //Laravel Audit
         OwenIt\Auditing\AuditingServiceProvider::class,
+        //Laravel code sniffer
+        SocialEngine\SnifferRules\ServiceProvider::class,
 
     ],
 

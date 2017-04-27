@@ -94,10 +94,10 @@ class RegisterController extends Controller
         );
         if ($validator->fails()) {
             $error_messages = $validator->messages()->all();
-            return redirect('/signup')->with('error','Please fill all fields');
+            return redirect('/signup')->with('error', 'Please fill all fields');
         } else {
-            if($password != $confirmPassword){
-                return redirect('/signup')->with('error','Password and confirm password should match');
+            if ($password != $confirmPassword) {
+                return redirect('/signup')->with('error', 'Password and confirm password should match');
             }
             $user = new User;
             $user->name = $name;
@@ -106,16 +106,15 @@ class RegisterController extends Controller
             $user->uuid = '';
             $user->loginType = 'manual';
             $user->save();
-            return redirect('/')->with('message','User Created Successfully! Please log in.');
+            return redirect('/')->with('message', 'User Created Successfully! Please log in.');
         }
-
     }
 
     public function getSignup()
     {
-        if(session()->has('error')){
-            return view('welcome')->with('error',session()->get('error'));
+        if (session()->has('error')) {
+            return view('welcome')->with('error', session()->get('error'));
         }
         return view('welcome');
-    }    
+    }
 }

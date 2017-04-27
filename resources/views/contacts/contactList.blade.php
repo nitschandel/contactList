@@ -22,7 +22,6 @@
             </div>
         </div>
         <div class="col-sm-4 add-button">
-            <a href="/contacts/download" class="btn btn-default add-new"><span class="glyphicon glyphicon-download"></span> Export all</a>
             <a href="/contacts/create" class="btn btn-default add-new"><span class="glyphicon glyphicon-plus"></span> Add new Contact</a>
             </a>
         </div>
@@ -68,6 +67,12 @@
             <br/>
             <br/>
             {{ $contacts->links() }}
+
+        @elseif(isset($searchText))
+            <div class="noContacts">
+                <p class="notFound">No such contacts found with name '{{$searchText}}'!!</p>
+            <a href="/contacts" class="btn btn-danger"> Back To Contacts</a> 
+            </div>
         @else
             <div class="noContacts">
                 <p class="notFound">No contacts found!! Please add few contacts.</p>

@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Auth;
 class ContactVCardController extends Controller
 {
 
-	public function __construct()
+    public function __construct()
     {
         $this->middleware('auth');
     }
@@ -20,12 +20,12 @@ class ContactVCardController extends Controller
 
     public function singleContactVCard($id)
     {
-    	$userId = Auth::id();
-        $contact = Contact::where('id',$id)
-                        ->where('userId',$userId)
+        $userId = Auth::id();
+        $contact = Contact::where('id', $id)
+                        ->where('userId', $userId)
                         ->first();
 
-        if(!$contact){
+        if (!$contact) {
             return false;
         }
 
@@ -35,10 +35,10 @@ class ContactVCardController extends Controller
         //adding all data
         $vcard->addName($contact->name);
         $vcard->addCompany($contact->organization);
-		$vcard->addEmail($contact->email);
-		$vcard->addPhoneNumber($contact->phone);
-		$vcard->addAddress(null, null, $contact->address);
-		$vcard->addBirthday($contact->dob);
+        $vcard->addEmail($contact->email);
+        $vcard->addPhoneNumber($contact->phone);
+        $vcard->addAddress(null, null, $contact->address);
+        $vcard->addBirthday($contact->dob);
 
         return $vcard->download();
     }
@@ -46,15 +46,14 @@ class ContactVCardController extends Controller
     public function FunctionName()
     {
         $userId = Auth::id();
-        $contact = Contact::where('userId',$userId)
+        $contact = Contact::where('userId', $userId)
                         ->first();
 
-        if(count($contact) == 0){
+        if (count($contact) == 0) {
             return false;
         }
 
         foreach ($contacts as $contact) {
-
             //VCard Object Created
             $vcard = new VCard();
 
@@ -65,7 +64,6 @@ class ContactVCardController extends Controller
             $vcard->addPhoneNumber($contact->phone);
             $vcard->addAddress(null, null, $contact->address);
             $vcard->addBirthday($contact->dob);
-
         }
 
         return $vcard->download();

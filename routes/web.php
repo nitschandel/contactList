@@ -11,7 +11,7 @@
 |
 */
 
-Route::get('/', array('as'=>'root', 'uses' => 'Auth\LoginController@Login'));
+Route::get('/', array('as'=>'root', 'uses' => 'Auth\LoginController@login'));
 
 Route::post('contacts/search', 'ContactController@search');
 
