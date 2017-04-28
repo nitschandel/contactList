@@ -253,6 +253,7 @@ class ContactController extends Controller
         $contact->delete();
     }
 
+    //Searching for a contact
     public function search(Request $request)
     {
         $searchText = $request->input('searchText');
