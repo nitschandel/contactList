@@ -64,14 +64,14 @@
                                         <input class="form-control input-lg" name="confirmPassword" id="confirm-password" type="hidden" placeholder="Password" hidden="true">
                                     </div>
                                     <div class="form-group remember-checkbox">
-                                        <input name="remember" id="remember" type="checkbox">
+                                        <input name="remember" id="remember" type="checkbox" value="1">
                                         <label for="Remember">Remember Me</label>
                                     </div>
                                     <div class="form-group last">
                                         <input type="submit" class="btn btn-warning btn-block btn-lg" id = "login-button" value="LOGIN">
                                     </div>
                                     <div class="form-group forgot-password">
-                                        <a href="#">Forgot Password?</a>
+                                        <a href="#" class="forgotPassword">Forgot Password?</a>
                                     </div>
                                     <p class="text-center signup-line">Don't have an account? <a class="signup-link">Sign Up</a> here.</p>
 
@@ -96,6 +96,46 @@
                 </div> 
             </div> 
         </div>
+
+        <div class="modal fade" id="forgotPasswordModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="row">
+                    <div class="col-md-12">
+                        <div class="panel panel-default">
+                            <div class="panel-body">
+                                <div class="text-center">
+                                      <h3><i class="fa fa-lock fa-4x"></i></h3>
+                                      <h2 class="text-center">Forgot Password?</h2>
+                                      <p>You can reset your password here.</p>
+                                        <div class="panel-body">
+                                          <div id="successMessage" style="color:green;"></div>
+                                          <div id="errorMessage" style="color:red;"></div>
+                                          <form class="forgotPasswordform" id="forgotPasswordform" action="/forgotPassword">
+                                          <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                                            <fieldset>
+                                              <div class="form-group">
+                                                <div class="input-group">
+                                                  <span class="input-group-addon"><i class="glyphicon glyphicon-envelope color-blue"></i></span>
+                                                  
+                                                  <input id="email" name="email" placeholder="email address" class="form-control" type="email" oninvalid="setCustomValidity('Please enter a valid email address!')" onchange="try{setCustomValidity('')}catch(e){}" required="">
+                                                </div>
+                                              </div>
+                                              <div class="form-group">
+                                                <input class="btn btn-lg btn-primary btn-block" value="Send My Password" type="submit">
+                                              </div>
+                                            </fieldset>
+                                          </form>
+                                          
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+          </div>        </div>
         <!-- /.javascript files -->
 
         <script type="text/javascript" src="{{ URL::asset('js/jquery-3.2.0.min.js') }}"></script>
@@ -123,11 +163,43 @@
                 $(".signup-link").click(function() {
                     signupChanges();
                 });
+
+                $(".forgotPassword").click(function() {
+                    $('#forgotPasswordModal').modal();
+                });
             });
 
             @if(isset($error))
                 alert('{{$error}}');
             @endif
+
+            $("#forgotPasswordform").submit(function(e) {
+                var url = $('#forgotPasswordform').attr('action');
+                e.preventDefault();
+                $.ajax({
+                   type: "POST",
+                   url: url,
+                   data: $("#forgotPasswordform").serialize(), // serializes the form's elements.
+                   success: function(data)
+                   {
+                       if(data.success){
+                            $('#errorMessage').hide();
+                            $('#successMessage').html("A link has been sent to your email id");
+                            $('#successMessage').show();
+                       }else{
+                            $('#successMessage').hide();
+                            $('#errorMessage').html(data.error);
+                            $('#errorMessage').show();
+                       }
+                   },
+                   error: function()
+                   {
+                        $('#successMessage').hide();
+                        $('#errorMessage').html("Please configure mail server");
+                        $('#errorMessage').show();
+                   }
+                 });
+            });
 
            
         </script>

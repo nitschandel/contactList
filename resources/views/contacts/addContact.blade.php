@@ -103,7 +103,7 @@ $('#errorMessage').hide()
 
   @if(isset($error))
     $('#errorMessage').html("{{$error}}");
-    $('#errorMessage').show()
+    $('#errorMessage').show();
   @endif
 
 </script>

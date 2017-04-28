@@ -52,12 +52,12 @@ class LoginController extends Controller
         return view('welcome');
     }
 
-    public function redirectToProvider()
+    public function redirectToProviderFacebook()
     {
         return Socialite::driver('facebook')->redirect();
     }
 
-    public function handleProviderCallback()
+    public function handleProviderCallbackFacebook()
     {
          $facebookUser = Socialite::driver('facebook')->user();
         try {
@@ -103,6 +103,7 @@ class LoginController extends Controller
     {
         $email = $request->input('email');
         $password = $request->input('password');
+        $remember = $request->input('remember');
 
         $validator = Validator::make(
             array(
@@ -118,7 +119,7 @@ class LoginController extends Controller
             $error_messages = $validator->messages()->all();
             return redirect('/')->with('error', 'Please fill all fields');
         } else {
-            if (Auth::attempt(['email' => $email, 'password' => $password])) {
+            if (Auth::attempt(['email' => $email, 'password' => $password], $remember)) {
                 return redirect('/contacts');
             } else {
                 return redirect('/')->with('error', 'Please enter correct credentials');

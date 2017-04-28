@@ -30,9 +30,13 @@ Route::get('/signup','Auth\RegisterController@getSignup');
 Route::post('/signup','Auth\RegisterController@signup');
 
 
-Route::get('auth/facebook', 'Auth\LoginController@redirectToProvider');
-Route::get('auth/facebook/callback', 'Auth\LoginController@handleProviderCallback');
+Route::get('auth/facebook', 'Auth\LoginController@redirectToProviderFacebook');
+Route::get('auth/facebook/callback', 'Auth\LoginController@handleProviderCallbackFacebook');
 
 Route::get('auth/google', 'Auth\LoginController@redirectToProviderGoogle');
 Route::get('auth/google/callback', 'Auth\LoginController@handleProviderCallbackGoogle');
+
+Route::post('/forgotPassword' , 'Auth\ResetPasswordController@sendChangePasswordLink');
+Route::get('/resetPassword' , 'Auth\ResetPasswordController@resetPassword');
+Route::post('/saveNewPassword' , 'Auth\ResetPasswordController@saveNewPassword');
 
